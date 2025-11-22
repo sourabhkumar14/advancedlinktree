@@ -57,6 +57,16 @@ const toolsItems = [
     icon: Link2,
   },
   {
+    title: "PDF Tool",               // NEW
+    url: "/admin/tools/pdf-tool",    // NEW route
+    icon: BarChart3,                 // you can pick any icon you like
+  },
+   {
+    title: "PDF ↔ PPT Converter",
+    url: "/admin/tools/pdf-ppt",  // <-- new tool
+    icon: BarChart3,              // choose an icon you like
+  },
+  {
     title: "Analytics",
     url: "/admin/tools/analytics",
     icon: TrendingUp,

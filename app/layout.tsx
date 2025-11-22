@@ -96,6 +96,15 @@
 
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
+
+// import localFont from 'next/font/local';
+
+// const Poppins = localFont({
+//   src: '/fonts/Poppins-Regular.woff2',
+//   display: 'swap',
+// });
+
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 

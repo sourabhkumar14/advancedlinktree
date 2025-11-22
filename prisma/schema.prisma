@@ -82,3 +82,6 @@ model ProfileAnalytics {
 
   @@index([visitedAt, userId])
 }
+
+
+
