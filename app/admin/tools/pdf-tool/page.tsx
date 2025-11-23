@@ -153,7 +153,7 @@ export default function PDFToolPage() {
     const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
 
     // FIX: use pdfBytes.buffer for Blob
-    const blob = new Blob([pdfBytes.buffer], { type: "application/pdf" });
+    const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
 
     setDownloadUrl(url);
