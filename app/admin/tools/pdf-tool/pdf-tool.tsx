@@ -375,10 +375,11 @@ export default function PDFPPTTool() {
 
       // replace line 376 with:
 const blob = await pptx.write({ type: "blob" } as any);
+// Tell TypeScript: this is a Blob
+const url = URL.createObjectURL(blob as Blob);
+setDownloadUrl(url);
 
 
-      const url = URL.createObjectURL(blob);
-      setDownloadUrl(url);
     } catch (err) {
       console.error(err);
       alert("Error converting PDF to PPT: " + err);
