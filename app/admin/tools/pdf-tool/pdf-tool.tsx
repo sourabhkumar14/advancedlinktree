@@ -373,7 +373,8 @@ export default function PDFPPTTool() {
         slide.addImage({ data: imgData, x: 0, y: 0, w: 10, h: 5.63 });
       }
 
-      const blob = await pptx.writeAsync("blob");
+      // replace line 376 with:
+const blob = await pptx.write({ type: "blob" } as any);
 
 
       const url = URL.createObjectURL(blob);
