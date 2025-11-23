@@ -8,79 +8,53 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  clerkId  String  @unique
-  email    String  @unique
-  username String? @unique
-
-  firstName String?
-  lastName  String?
-  imageUrl  String?
-
-  bio String? @db.VarChar(500)
-
-  links Link[]
-  socialLinks SocialLink[]
+  id           String             @id @default(cuid())
+  clerkId      String             @unique
+  email        String             @unique
+  username     String?            @unique
+  firstName    String?
+  lastName     String?
+  imageUrl     String?
+  bio          String?            @db.VarChar(500)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  links        Link[]
   profileViews ProfileAnalytics[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  socialLinks  SocialLink[]
 }
-
-// model Link {
-//   id String @id @default(cuid())
-
-//   title       String
-//   url         String
-//   description String? @db.VarChar(500)
-//   clickCount  Int     @default(0)
-//   analytics LinkAnalytics[]
-//   userId    String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-// }
-
-
 
 model Link {
-  id          String   @id @default(cuid())
-  code        String   @unique       // add this line
+  id          String          @id @default(cuid())
   title       String
   url         String
-  description String? @db.VarChar(500)
-  clickCount  Int     @default(0)
-  analytics   LinkAnalytics[]
+  description String?         @db.VarChar(500)
+  clickCount  Int             @default(0)
   userId      String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  code        String?         @unique
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analytics   LinkAnalytics[]
 }
 
-
 model SocialLink {
-  id String @id @default(cuid())
-  platform String
-  url String
-  userId String
-
-   createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  platform  String
+  url       String
+  userId    String
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model LinkAnalytics {
-   id        String   @id @default(cuid())
-   linkId    String
-   clickedAt DateTime 
-   clickerIp String @db.VarChar(45)
-
-  link  Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
-   createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  linkId    String
+  clickedAt DateTime
+  clickerIp String   @db.VarChar(45)
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
 
   @@unique([linkId, clickedAt, clickerIp])
   @@index([clickedAt, linkId])
@@ -91,14 +65,16 @@ model ProfileAnalytics {
   userId    String
   visitedAt DateTime @default(now())
   visitorIp String   @db.VarChar(45)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([visitedAt, userId])
 }
 
-
-
+model ShortLink {
+  id        String   @id
+  code      String   @unique
+  url       String
+  createdAt DateTime @default(now())
+}
