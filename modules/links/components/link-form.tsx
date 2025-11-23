@@ -216,7 +216,7 @@ try {
     if(editingSocialLink){
         const result = await editSocialLink(data , editingSocialLink.id)
 
-          if (result?.sucess) {
+          if (result?.success) {
           setUserSocialLinks((prev) =>
             prev.map((link) =>
               link.id === editingSocialLink.id
