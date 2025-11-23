@@ -141,29 +141,30 @@ export default function PDFToolPage() {
   };
 
   const handleCompress = async () => {
-    if (!file) return alert("Please select a PDF");
+  if (!file) return alert("Please select a PDF");
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
 
-      // Minimal compression (rebuild PDF)
-      const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
+    // Minimal compression (rebuild PDF)
+    const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
 
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
-      const url = URL.createObjectURL(blob);
+    // FIX: use pdfBytes.buffer for Blob
+    const blob = new Blob([pdfBytes.buffer], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
 
-      setDownloadUrl(url);
-      setCompressedSize(blob.size / (1024 * 1024)); // in MB
-    } catch (err) {
-      console.error(err);
-      alert("Error processing PDF");
-    } finally {
-      setLoading(false);
-    }
-  };
+    setDownloadUrl(url);
+    setCompressedSize(blob.size / (1024 * 1024)); // in MB
+  } catch (err) {
+    console.error(err);
+    alert("Error processing PDF");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="flex justify-center items-center min-h-[80vh] p-4">
