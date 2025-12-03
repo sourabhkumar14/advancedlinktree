@@ -13,7 +13,9 @@ interface OGData {
   favicon?: string;
 }
 
-export const runtime = "nodejs"; // added on 03dec
+export const runtime = "nodejs";  // added on 03dec
+export const dynamic = "force-dynamic";  // added on 03dec
+
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
