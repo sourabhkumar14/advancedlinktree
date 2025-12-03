@@ -27,11 +27,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip Next internals, static files
-    "/((?!_next|.*\\.(?:.*)$).*)",
-
-    // Only include API routes EXCEPT og-data using top-level lookahead
-    "/api/(.*)",
-    "/trpc/(.*)",
+    // Run middleware ONLY for pages, NOT for API routes
+    "/((?!_next|api|trpc|.*\\.(.*)$).*)",
   ],
 };
