@@ -5,7 +5,7 @@ const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)', 
   '/sign-up(.*)',
   '/api/og-data(.*)', // added on 03dec
-  '/([^/]+)' // This matches any single segment path like /username
+  '/[a-zA-Z0-9_-]+', //  added on 03dec This matches any single segment path like /username
 ])
 
 export default clerkMiddleware(async (auth, req) => {
@@ -27,7 +27,6 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Apply middleware ONLY on non-API, non-assets pages
     '/((?!_next/|api/|trpc/|favicon.ico|.*\\..*$).*)',
   ],
 };
