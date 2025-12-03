@@ -5,7 +5,7 @@ const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)', 
   '/sign-up(.*)',
   '/api/og-data(.*)', // added on 03dec
-  '/[a-zA-Z0-9_-]+', //  added on 03dec This matches any single segment path like /username
+ '/u/(.*)', //  added on 03dec This matches any single segment path like /username
 ])
 
 export default clerkMiddleware(async (auth, req) => {
