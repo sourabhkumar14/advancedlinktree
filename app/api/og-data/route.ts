@@ -13,6 +13,8 @@ interface OGData {
   favicon?: string;
 }
 
+export const runtime = "nodejs"; // added on 03dec
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const url = searchParams.get('url');
