@@ -5,7 +5,7 @@ const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)', 
   '/sign-up(.*)',
   '/api/og-data(.*)', // added on 03dec
-   '/([^/]+)' // This matches any single segment path like /username
+  '/([^/]+)' // This matches any single segment path like /username
 ])
 
 export default clerkMiddleware(async (auth, req) => {
@@ -14,11 +14,23 @@ export default clerkMiddleware(async (auth, req) => {
   }
 })
 
+// export const config = {
+  // matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    // '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    // '/(api|trpc)(.*)',
+  // ],
+// };
+
+// added on 03dec
+
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
+    // Skip Next.js internals, static files, AND skip /api/og-data
+    '/((?!_next|api/og-data|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+
+    // Run middleware for API routes EXCEPT /api/og-data
+    '/((?!api/og-data)(api|trpc)(.*))',
   ],
 };
