@@ -27,7 +27,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Run middleware ONLY for pages, NOT for API routes
-    "/((?!_next|api|trpc|.*\\.(.*)$).*)",
+    // Apply middleware ONLY on non-API, non-assets pages
+    '/((?!_next/|api/|trpc/|favicon.ico|.*\\..*$).*)',
   ],
 };
