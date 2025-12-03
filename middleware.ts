@@ -27,10 +27,11 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals, static files, AND skip /api/og-data
-    '/((?!_next|api/og-data|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // All routes except: _next, static files, AND api/og-data
+    "/((?!_next|api/og-data|.*\\.(?:html?|css|js(?!on)|jpe?g|png|gif|svg|webp|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)$).*)",
 
-    // Run middleware for API routes EXCEPT /api/og-data
-    '/((?!api/og-data)(api|trpc)(.*))',
+    // All API routes EXCEPT /api/og-data
+    "/api/(?!og-data).*",
+    "/trpc/(.*)",
   ],
 };
