@@ -27,11 +27,11 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // All routes except: _next, static files, AND api/og-data
-    "/((?!_next|api/og-data|.*\\.(?:html?|css|js(?!on)|jpe?g|png|gif|svg|webp|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)$).*)",
+    // Skip Next internals, static files
+    "/((?!_next|.*\\.(?:.*)$).*)",
 
-    // All API routes EXCEPT /api/og-data
-    "/api/(?!og-data).*",
+    // Only include API routes EXCEPT og-data using top-level lookahead
+    "/api/(.*)",
     "/trpc/(.*)",
   ],
 };
