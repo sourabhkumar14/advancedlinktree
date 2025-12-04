@@ -1,8 +1,11 @@
 // eslint.config.mjs
-import { defineConfig } from "eslint";
+
+import eslint from "eslint";
 import next from "eslint-config-next";
 
-export default defineConfig([
+const { FlatCompat } = eslint;
+
+export default [
   {
     ignores: [
       ".next/**",
@@ -12,5 +15,4 @@ export default defineConfig([
     ],
   },
   ...next,
-]);
- 
+];

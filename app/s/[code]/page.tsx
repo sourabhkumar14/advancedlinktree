@@ -1,9 +1,8 @@
 "use client";
 
-export default function Page({ params }: { params: { code: string } }) {
-  const { code } = params;
+export default function Page({ params }: any) {
+  const code = params.code;
 
-  // Read from localStorage
   const store: Record<string, string> =
     JSON.parse(localStorage.getItem("shortLinks") || "{}");
 
