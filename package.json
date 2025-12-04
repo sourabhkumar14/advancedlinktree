@@ -2,7 +2,6 @@
   "name": "tree-bio-build",
   "version": "0.1.0",
   "private": true,
-  
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -41,6 +40,7 @@
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -50,7 +50,7 @@
     "form-data": "^4.0.5",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.552.0",
-    "next": "13.4.12",
+    "next": "15.1.0",
     "next-themes": "^0.4.6",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^2.16.105",
