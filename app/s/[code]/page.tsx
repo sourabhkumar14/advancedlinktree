@@ -1,36 +1,17 @@
-//full working code
-// "use client";
-
 "use client";
 
+export default function Page({ params }: { params: { code: string } }) {
+  const { code } = params;
 
-import { useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+  // Read from localStorage
+  const store: Record<string, string> =
+    JSON.parse(localStorage.getItem("shortLinks") || "{}");
 
-export default function RedirectPage() {
-  const params = useParams();
-  const router = useRouter();
+  const original = store[code];
 
-  useEffect(() => {
-    // Ensure code is a string
-    const code = Array.isArray(params.code) ? params.code[0] : params.code;
+  if (original) {
+    window.location.href = original;
+  }
 
-    // Read from localStorage
-    const store: Record<string, string> = JSON.parse(localStorage.getItem("shortLinks") || "{}");
-    const original = store[code];
-
-    if (original) {
-      window.location.href = original;
-    } else {
-      alert("Short URL not found!");
-      router.push("/");
-    }
-  }, [params.code, router]);
-
-  return <p>Redirecting...</p>;
+  return <div>Redirecting...</div>;
 }
-
-
-
-
-
